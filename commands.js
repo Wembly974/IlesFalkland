@@ -1,4 +1,6 @@
 import { clear } from './commands/clear.js';
+import { warn } from './commands/warn.js';
+import { tempmute } from './commands/tempmute.js';
 const commands = [
     {
         name: 'clear',
@@ -73,3 +75,4 @@ const commands = [
     },
     
 ]
+export default commands;

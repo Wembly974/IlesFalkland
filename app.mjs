@@ -2,12 +2,14 @@ import { Client, GatewayIntentBits, ActivityType, REST, Routes } from 'discord.j
 import commands from './commands.js'; // Your command definitions
 import { logCommand } from './utils/cmdlogManager.js'; // Log commands utility
 import chalk from 'chalk';
+import dotenv from 'dotenv';
 
-const CLIENT_ID = '1300896169500741786'; // Add your client ID
-const GUILD_ID = '1299728255456116746'; // Add your guild (server) ID
-const TOKEN = 'MTMwMDg5NjE2OTUwMDc0MTc4Ng.G7W3Gs.cKwlfsas7BFvRfl0CYyosuc2vuOIItk69UFRdI'; // Add your bot token
-const AUTO_ROLE_ID = '1296580385991426058'; // Replace with the role ID you want to assign
-//
+dotenv.config(); // Load environment variables
+
+const CLIENT_ID = process.env.CLIENT_ID;
+const GUILD_ID = process.env.GUILD_ID;
+const TOKEN = process.env.TOKEN;
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -17,7 +19,7 @@ const client = new Client({
         GatewayIntentBits.GuildMembers // Include for detecting new members
     ]
 });
-//
+
 client.once('ready', async () => {
     function clearScreen() {
         console.clear();
@@ -26,7 +28,7 @@ client.once('ready', async () => {
     const botUserName = 'IlesFalkland 🍋';
     clearScreen();
 
-    console.log(chalk.greenBright(`Done Login as ${chalk.redBright.bold('IlesFalkland 🍋')}`));
+    console.log(chalk.greenBright(`Done Login as ${chalk.redBright.bold(botUserName)}`));
     console.log(`▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬${chalk.yellowBright('[ LOG ]')}▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬`);
 
     try {
@@ -37,26 +39,25 @@ client.once('ready', async () => {
         console.log(`${chalk.greenBright('[SUCCESS]')} -- ${chalk.redBright.bold(botUserName)} - ${chalk.cyanBright('Made by ( Wembly )')}`);
         console.log(`${chalk.redBright('[INFO]')} -- ${chalk.white('Status and activity set successfully')}`);
     } catch (error) {
-        console.log(`${chalk.redBright('[ERROR]')} -- ${chalk.white("can't update the status")}}`, error);
+        console.log(`${chalk.redBright('[ERROR]')} -- ${chalk.white("can't update the status")}`, error);
     }
 
     const rest = new REST({ version: '10' }).setToken(TOKEN);
 
     try {
-        console.log(`${chalk.redBright('[INFO]')} -- ${chalk.white('starts refreshing all (/) command')}`);
+        console.log(`${chalk.redBright('[INFO]')} -- ${chalk.white('Starting to refresh all (/) commands')}`);
 
         await rest.put(
             Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
             { body: commands.map(cmd => ({ name: cmd.name, description: cmd.description, options: cmd.options || [] })) }
         );
 
-        console.log(`${chalk.greenBright('[SUCCESS]')} -- ${chalk.white('all (/) commands have been Successfully reloaded')}`);
+        console.log(`${chalk.greenBright('[SUCCESS]')} -- ${chalk.white('All (/) commands have been successfully reloaded')}`);
     } catch (error) {
-        console.error(`${chalk.redBright('[ERROR]')} -- ${chalk.white("can't reload the commands")}`, error);
+        console.error(`${chalk.redBright('[ERROR]')} -- ${chalk.white("Can't reload the commands")}`, error);
     }
 });
 
-//
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return;
 
@@ -74,5 +75,4 @@ client.on('interactionCreate', async (interaction) => {
     }
 });
 
-//
 client.login(TOKEN);

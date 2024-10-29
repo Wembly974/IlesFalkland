@@ -1,6 +1,4 @@
 import { EmbedBuilder } from 'discord.js';
-import fs from 'fs';
-import { addPoints, getPoints, setPoints } from '../utils/pointsManager.js'; // Adjust the path accordingly
 import chalk from 'chalk';
 const date = new Date();
 const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
