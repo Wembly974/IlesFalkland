@@ -101,6 +101,12 @@ const commands = [
         ],
         execute: rank,
     },
+    {
+        name: 'derank',
+        description: 'Rank Up a member',
+
+        execute: derank,
+    },
     
 ]
 export default commands;
