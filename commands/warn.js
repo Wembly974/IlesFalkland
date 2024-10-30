@@ -4,7 +4,7 @@ const date = new Date();
 const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
 
 export const warn = async (interaction) => {
-    const requiredRole = 'Ancient Staff'+'🏅» Officer'+'👑» Leader'; // Replace with the name or ID of the role
+    const requiredRole = 'Ancient Staff'; // Replace with the name or ID of the role
     const member = interaction.guild.members.cache.get(interaction.user.id);
 
     // Check if the user has the required role
@@ -24,7 +24,7 @@ export const warn = async (interaction) => {
     }
     const user = interaction.client.users.cache.get(warnedUser.id);
     if (user) {
-        user.send(`You have been warned for the following reason: ${reason}.`);
+        user.send(`You have been warned for the following reason: **${reason}**.`);
     }
 
     // Apply the "Warned" role to the user

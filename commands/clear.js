@@ -6,7 +6,7 @@ export const clear = async (interaction) => {
     const numberOfMessages = interaction.options.getInteger('amount');
     const logChannelId = '1300903075841835008'; // Replace with your log channel ID
     const logChannel = interaction.guild.channels.cache.get(logChannelId);
-    const requiredRole = 'Ancient Staff'+'🏅» Officer'+'👑» Leader'; // Adjust role name/ID accordingly
+    const requiredRole = 'Ancient Staff'; // Adjust role name/ID accordingly
     const member = interaction.guild.members.cache.get(interaction.user.id);
 
     // Check if user has the required role

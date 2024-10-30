@@ -3,7 +3,7 @@ import chalk from 'chalk';
 const date = new Date();
 const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
 export const tempmute = async (interaction) => {
-    const requiredRole = 'Ancient Staff'+'🏅» Officer'+'👑» Leader';
+    const requiredRole = 'Ancient Staff';
     const member = interaction.guild.members.cache.get(interaction.user.id);
 
     if (!member.roles.cache.some(role => role.name === requiredRole)) {
@@ -80,7 +80,7 @@ export const tempmute = async (interaction) => {
                     .setColor('#00FF00')
                     .addFields(
                         { name: 'Username', value: `<@${userId}>`, inline: false },
-                        { name: 'Status', value: `Mute duration has ended : ${durationValue} ${durationUnit}`, inline: false }
+                        { name: 'Status', value: `Mute duration has ended : **${durationValue} ${durationUnit}**`, inline: false }
                     );
                 await logChannel.send({ embeds: [unmuteEmbed] });
             }

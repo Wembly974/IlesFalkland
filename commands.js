@@ -1,6 +1,9 @@
 import { clear } from './commands/clear.js';
 import { warn } from './commands/warn.js';
 import { tempmute } from './commands/tempmute.js';
+import { rank } from './commands/rank.js';
+import { derank } from './commands/derank.js';
+
 const commands = [
     {
         name: 'clear',
@@ -72,6 +75,31 @@ const commands = [
         ],
         execute: warn,
         
+    },
+    {
+        name: 'rank',
+        description: 'Rank Up a member',
+        options: [
+            {
+                name: 'user',
+                description: 'User to rank up',
+                type: 6, // User
+                required: true,
+            },
+            {
+                name: 'role',
+                description: 'role to add',
+                type: 3, // String
+                required: true,
+                choices: [
+                    { name: '🚀» recruit', value: 'role1' },
+                    { name: '🥇» Member', value: 'role2' },
+                    { name: '🏅» Officer', value: 'role3' },
+                    { name: '👑» Leader', value: 'role4' },
+                ],
+            },
+        ],
+        execute: rank,
     },
     
 ]
