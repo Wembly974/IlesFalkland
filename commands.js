@@ -1,10 +1,15 @@
-import { clear } from './commands/clear.js';
-import { warn } from './commands/warn.js';
-import { tempmute } from './commands/tempmute.js';
-import { rank } from './commands/rank.js';
-import { derank } from './commands/derank.js';
-import { profile } from './commands/profile.js';
-import { support } from "./commands/support.js";
+import { clear } from './commands/clear.js';//1
+import { warn } from './commands/warn.js';//2
+import { tempmute } from './commands/tempmute.js';//3
+import { rank } from './commands/rank.js';//4
+import { derank } from './commands/derank.js';//5
+import { profile } from './commands/profile.js';//6
+import { support } from "./commands/support.js";//7
+import { srole } from "./commands/srole.js";//8
+import { srules } from "./commands/rules.js";//9
+import { addRole , handleAutocomplete} from './commands/addrole.js';//10
+import { removeRole } from './commands/removerole.js';//11
+import { wiki } from './commands/wiki.js';//12
 const commands = [
     {
         name: "clear",
@@ -93,10 +98,13 @@ const commands = [
                 type: 3, // String
                 required: true,
                 choices: [
-                    { name: "🚀» recruit", value: "role1" },
-                    { name: "🥇» Member", value: "role2" },
-                    { name: "🏅» Officer", value: "role3" },
                     { name: "👑» Leader", value: "role4" },
+                    { name: "🏅» Officer", value: "role3" },
+                    { name: "🥇» Member", value: "role2" },
+                    { name: "🚀» recruit", value: "role1" }
+                    
+                    
+                    
                 ],
             },
         ],
@@ -126,5 +134,63 @@ const commands = [
         ],
         execute: profile,
     },   
+    {
+        name: "srole",
+        description: "test",
+        execute: srole,
+    },
+        {
+        name: "srule",
+        description: "send rules",
+        execute: srules,
+    },
+    {
+        name: 'addrole',
+        description: 'Assign a role to a user',
+        options: [
+            {
+                name: 'user',
+                description: 'The user to assign the role to',
+                type: 6, // USER type
+                required: true,
+            },
+            {
+                name: 'role',
+                description: 'The role to assign',
+                type: 3, // STRING type
+                required: true,
+                autocomplete: true
+            }
+        ],
+        execute: addRole,
+        autocomplete: handleAutocomplete
+    },
+
+    {
+        name: 'removerole',
+        description: 'Remove a role from a user',
+        options: [
+           	{
+                name: 'user',
+                description: 'User to remove the role from',
+                type: 6, // User type
+                required: true
+            },
+            {
+                name: 'role',
+                description: 'Role to remove',
+                type: 3, // String for role choices
+                required: true,
+                autocomplete: true
+            }
+        ],
+        execute: removeRole,
+   	},
+        {
+        name: 'wiki',
+        description: 'to learn everything about NationsGlory',
+        execute: wiki,
+    },
+    
 ]
 export default commands;
